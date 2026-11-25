@@ -82,7 +82,7 @@ python main.py --dataset yelp --victim_model xlnet-base-cased ...
 
 ## Paper Results vs Ours
 
-The experiment prints a side-by-side comparison table after each run.
+Each victim model is run individually. The experiment does not automatically compare all three models in a single execution. Run the command separately for each model.
 
 Key results from the paper (Table 6, 7):
 
@@ -110,7 +110,6 @@ All results saved to `--output_dir`:
 ## Project Structure
 
 ```
-cara_poison/
   main.py             - experiment runner (top-level entry point)
   config.py           - all hyperparameters via argparse
   cara_model.py       - CARA architecture (encoders, decoders, GAN)
@@ -120,13 +119,16 @@ cara_poison/
   data_utils.py       - data loading, vocabulary, dataset classes
   evaluation.py       - metrics, confusion matrices, paper comparison
   requirements.txt    - pip dependencies
+  spectral_defense.py
+  run_spectral_defense_yelp.py
+
 ```
 
 ---
 
 ## Notes
 
-- The paper uses 10% poisoned samples as default; 1% already achieves >80% trigger rate on Yelp.
+- The paper uses 10% poisoned samples as default
 - CARA quality (naturalness/label-preservation) improves with more training epochs.
 - Using `--num_samples_limit 10000` for quick tests (lowers quality but runs faster).
 - Clean accuracy should stay close to unpoisoned baseline (paper shows this is a key property of BP attacks).
